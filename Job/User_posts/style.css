@@ -1,0 +1,68 @@
+.header-container {
+    text-align: center;
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.all-posts {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin: 15px;
+    border: 5px solid black;
+    width: 800px;
+    height: 500px;
+    overflow: scroll;
+}
+
+.favorite-posts {
+    padding: 10px;
+    margin: 15px;
+    border: 5px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.favorite-posts h1{
+    text-align: center;
+    width: 300px;
+}
+
+.selected-post {
+    padding: 10px;
+    margin: 15px;
+    border: 5px solid black;
+    flex-flow: row wrap;
+}
+
+.post-style {
+    border: 2px double grey;
+    margin: 5px;
+    padding: 2px;
+    border-radius: 25px;
+    max-width: 240px;
+}
+
+.post-title {
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+}
+
+.post-content {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    text-align: justify;
+    font-size: 12px;
+}
+
+.post-button {
+    background-image: url('./favorite.png');    
+    width: 30px;
+    height: 30px;
+
+}
