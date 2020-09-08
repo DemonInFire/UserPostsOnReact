@@ -1,0 +1,21 @@
+.Container {
+    border: 2px ridge #3E50F3;
+    margin: 1vh;
+    padding: 1vh;
+    border-radius: 3px;
+    position:relative;
+}
+
+.Container:hover {
+    cursor: pointer;
+    background:#53ea93;
+}
+
+.Button {
+    position:absolute;
+    top:0;
+    right:0;
+    background-image: url(./../../img/delete.jpg);
+    height: 32px;
+    width: 32px;
+}

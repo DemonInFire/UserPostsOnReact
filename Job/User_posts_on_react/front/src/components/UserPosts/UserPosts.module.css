@@ -1,0 +1,23 @@
+.Container {
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 71.5vh;
+    overflow-x: hidden;
+    border: 4px solid blue;
+    border-radius: 8px;
+    margin: 2px;
+}
+
+@media (max-width:1056px){
+    .Container {
+        height: 66.5vh;
+    }
+}
+
+@media (max-width:670px){
+    .Container {
+        height: 50vh;
+    }
+}

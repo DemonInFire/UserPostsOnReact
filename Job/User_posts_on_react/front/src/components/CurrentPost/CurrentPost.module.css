@@ -1,0 +1,30 @@
+.Title {
+    text-align: center;
+}
+
+.Container{
+    border: 4px solid blue;
+    border-radius: 8px;
+    height: 25vh;
+    margin: 2px;
+}
+
+.Container:hover {
+    box-shadow: inset 0 0 0 10px #53ea93;
+}
+
+.Content {
+    padding: 4px;
+}
+
+@media (max-width:1056px){
+    .Container {
+        height: 30vh;
+    }
+}
+
+@media (max-width:670px){
+    .Container {
+        height: 46.5vh;
+    }
+}
