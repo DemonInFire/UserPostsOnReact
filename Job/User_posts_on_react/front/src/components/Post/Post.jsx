@@ -12,7 +12,7 @@ const Post = ({post}) => {
         <div className={style.Container} onClick={() => postInformation(post.title, post.body)}>
             <input type="checkbox" title="add to favorite" className={style.Button} onClick={() =>{
                 addPost(post.title, post.body, post.id)
-                removePost(post.id)}}/>
+            }}/>
             <h3 className={style.Title}>{post.title}</h3>
             <div>{post.body}</div>
         </div>
