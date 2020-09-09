@@ -13,7 +13,7 @@ const FavoritePost = ({post}) => {
             <button className={style.Button} onClick={() =>{
                 addPost(post.title, post.body, post.id)
                 removePost(post.id)}}/>
-            <h3>{post.title}</h3>
+            <h3 className={style.Title}>{post.title}</h3>
             <div>{post.body}</div>
         </div>
     )

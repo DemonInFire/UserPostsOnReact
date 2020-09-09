@@ -1,7 +1,8 @@
 .Container {
+    width: 32.5%;
     border: 2px ridge #3E50F3;
-    margin: 1vh;
-    padding: 1vh;
+    margin: 2px;
+    padding: 2px;
     border-radius: 3px;
     position:relative;
 }
@@ -9,6 +10,11 @@
 .Container:hover {
     cursor: pointer;
     background:#53ea93;
+}
+
+.Title {
+    padding-top: 10px;
+    text-align: center;
 }
 
 .Button {

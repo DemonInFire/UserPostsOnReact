@@ -1,0 +1,24 @@
+nav {
+    height: 8.5%;
+}
+
+ul {
+    background-color: cornflowerblue;
+    list-style-type: none;
+    margin: 0;
+    padding: 3vh;
+    overflow: hidden;
+    height: 32%;
+}
+
+li {
+    display: inline;
+}
+
+.NavLink {
+    text-decoration: none;
+    margin: 5px;
+    font-size: 3vh;
+    border: solid 5px;
+    border-radius: 10px;
+}
