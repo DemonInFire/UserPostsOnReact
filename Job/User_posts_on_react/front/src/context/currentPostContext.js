@@ -3,10 +3,7 @@ import React, {createContext, useState} from 'react'
 export const CurrentPostContext = createContext()
 
 const CurrentPostContextProvider = (props) => {
-    const [state, setState] = useState({
-        title:'Title',
-        content:'Content',
-    })
+    const [state, setState] = useState({})
 
     const postInformation = (title, content) => {
         setState({
