@@ -26,13 +26,13 @@
     cursor:pointer;
 }
 .Button:before {
-   content: "\2605";
-   position: absolute;
-   visibility:visible;
+    content: "\2606";
+    position: absolute;
+    visibility:visible;
 }
 .Button:checked:before {
-   content: "\2606";
-   position: absolute;
+    content: "\2605";
+    position: absolute;
 }
 
 /* @media (max-width:1056px){

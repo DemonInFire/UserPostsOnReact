@@ -12,6 +12,7 @@ const FavoritePostsContextProvider = (props) => {
     const removePost = (id) => {
         setFavoritePosts(favoritePosts.filter(post => post.id !== id))
     }
+
     return (
         <FavoritePostsContext.Provider value={{ favoritePosts, addPost, removePost }}>
             {props.children}

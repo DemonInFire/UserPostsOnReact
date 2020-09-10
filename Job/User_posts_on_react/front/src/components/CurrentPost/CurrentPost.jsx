@@ -1,5 +1,6 @@
 import React, {useContext} from 'react'
 import {CurrentPostContext} from './../../context/currentPostContext'
+import { createPortal } from 'react-dom'
 import style from './CurrentPost.module.css'
 
 const CurrentPost = () => {

@@ -14,16 +14,8 @@ const PostsContextProvider = (props) => {
         fetchData()
     }, [])
 
-    const addPost = (title, body, id) => {
-        setPosts([...posts, { title, body, id }])
-    }
-
-    const removePost = (id) => {
-        setPosts(posts.filter(post => post.id !== id))
-    }
-
     return (
-        <PostsContext.Provider value={{ posts, removePost, addPost }}>
+        <PostsContext.Provider value={{ posts }}>
             {props.children}
         </PostsContext.Provider>
     )
