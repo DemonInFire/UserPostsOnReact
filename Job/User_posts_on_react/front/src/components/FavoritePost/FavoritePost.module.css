@@ -1,8 +1,8 @@
 .Container {
-    width: 32.5%;
+    width: 32%;
     border: 2px ridge #3E50F3;
-    margin: 2px;
-    padding: 2px;
+    margin: 3px;
+    padding: 5px;
     border-radius: 3px;
     position:relative;
 }
@@ -24,4 +24,76 @@
     background-image: url(./../../img/delete.jpg);
     height: 32px;
     width: 32px;
+}
+
+@media (max-width:1512px){
+    .Container {
+        width: 31.9%;
+    }
+}
+
+@media (max-width:1408px){
+    .Container {
+        width: 31.8%;
+    }
+}
+
+@media (max-width:1320px){
+    .Container {
+        width: 31.7%;
+    }
+}
+
+@media (max-width:1238px){
+    .Container {
+        width: 31.6%;
+    }
+}
+
+@media (max-width:1166px){
+    .Container {
+        width: 31.5%;
+    }
+}
+
+@media (max-width:1106px){
+    .Container {
+        width: 31.4%;
+    }
+}
+
+@media (max-width:1048px){
+    .Container {
+        width: 31.3%;
+    }
+}
+
+@media (max-width:998px){
+    .Container {
+        width: 47.7%;
+    }
+}
+
+@media (max-width:882px){
+    .Container {
+        width: 47.6%;
+    }
+}
+
+@media (max-width:846px){
+    .Container {
+        width: 47.5%;
+    }
+}
+
+@media (max-width:818px){
+    .Container {
+        width: 47.4%;
+    }
+}
+
+@media (max-width:784px){
+    .Container {
+        width: 98%;
+    }
 }
