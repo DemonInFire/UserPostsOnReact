@@ -22,6 +22,7 @@
     top:0;
     right:0;
     background-image: url(./../../img/delete.jpg);
+    cursor:pointer;
     height: 32px;
     width: 32px;
 }
