@@ -16,7 +16,9 @@ const UserPosts = () => {
             <div className={style.Container}>
                 {
                     posts.map (post => {
-                        return (<Post post={post} key={post.id}/>)
+                        return (
+                        post.checked = false,
+                        <Post post={post} key={post.id} />)
                     })
                 }
             </div> 

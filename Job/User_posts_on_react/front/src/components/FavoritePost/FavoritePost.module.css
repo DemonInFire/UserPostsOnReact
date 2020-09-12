@@ -1,10 +1,11 @@
 .Container {
-    width: 32%;
+    width: 31%;
     border: 2px ridge #3E50F3;
     margin: 3px;
     padding: 5px;
     border-radius: 3px;
     position:relative;
+    max-height: 40vh;
 }
 
 .Container:hover {
@@ -25,4 +26,16 @@
     cursor:pointer;
     height: 32px;
     width: 32px;
+}
+
+@media (max-width:873px) {
+    .Container {
+        width: 46%;
+    }
+}
+
+@media (max-width:513px) {
+    .Container {
+        width: 95%;
+    }
 }

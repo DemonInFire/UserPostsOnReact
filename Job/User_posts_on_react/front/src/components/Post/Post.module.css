@@ -1,5 +1,5 @@
 .Container {
-    width: 32%;
+    width: 31%;
     border: 2px ridge #3E50F3;
     margin: 3px;
     padding: 5px;
@@ -35,4 +35,16 @@
 .Button:checked:before {
     content: "\2605";
     position: absolute;
+}
+
+@media (max-width:873px) {
+    .Container {
+        width: 46%;
+    }
+}
+
+@media (max-width:513px) {
+    .Container {
+        width: 95%;
+    }
 }
