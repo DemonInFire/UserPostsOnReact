@@ -5,9 +5,9 @@ const Modal = ({children}) => {
 
     return (
             <div className={style.Container}>
-                <p className={style.Window}>
+                <div className={style.Window}>
                     {children}
-                </p>
+                </div>
             </div>
     )
 }

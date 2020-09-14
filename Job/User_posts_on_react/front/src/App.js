@@ -5,20 +5,24 @@ import CurrentPostContextProvider from './context/currentPostContext';
 import ModalContextProvider from './context/modalContext'
 import style from './App.module.css'
 import Navbar from './components/Navbar/Navbar';
+import { Provider } from 'react-redux';
+import store from './store/reduxStore'
 
 function App() {
   return (
-    <div className={style.Main}>
-      <ModalContextProvider>
-        <CurrentPostContextProvider>
-          <FavoritePostsContextProvider>
-            <PostsContextProvider>
-              <Navbar />
-            </PostsContextProvider>
-          </FavoritePostsContextProvider>
-        </CurrentPostContextProvider>
-      </ModalContextProvider>
-    </div>
+    <Provider store={store}>
+      <div className={style.Main}>
+        <ModalContextProvider>
+          <CurrentPostContextProvider>
+            <FavoritePostsContextProvider>
+              <PostsContextProvider>
+                <Navbar />
+              </PostsContextProvider>
+            </FavoritePostsContextProvider>
+          </CurrentPostContextProvider>
+        </ModalContextProvider>
+      </div>
+    </Provider>
   );
 }
 

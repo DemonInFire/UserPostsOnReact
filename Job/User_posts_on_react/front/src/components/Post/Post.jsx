@@ -1,15 +1,16 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FavoritePostsContext } from '../../context/favoritePostsContext'
 import { CurrentPostContext } from '../../context/currentPostContext'
 import { ModalContext } from '../../context/modalContext'
+import { connect } from 'react-redux'
+import checkDispatch from './../actionCreator/check'
 import style from './Post.module.css'
 
-const Post = ({post}) => {
+const Post = ({post, check, checkDispatch}) => {
     const {addPost, removePost} = useContext(FavoritePostsContext)
     const {postInformation} = useContext(CurrentPostContext)
     const {toggleModal} = useContext(ModalContext)
-    const [checked, setChecked] = useState(false);
-
+    let checked = check
     const sendInfo = () => {
         postInformation(post.title, post.body)
         toggleModal()
@@ -17,7 +18,11 @@ const Post = ({post}) => {
 
     const handleChildClick = (e) => {
         e.stopPropagation()
-        setChecked(!checked)
+    }
+
+    const handleChanges = () => {
+        checked = !checked
+        checkDispatch(checked)
     }
 
     useEffect(() => {
@@ -32,6 +37,7 @@ const Post = ({post}) => {
                 checked={checked} 
                 className={style.Button} 
                 onClick={handleChildClick}
+                onChange={handleChanges}
             />
             <h3 className={style.Title}>{post.title}</h3>
             <div>{post.body}</div>
@@ -39,4 +45,10 @@ const Post = ({post}) => {
     )
 }
 
-export default Post
+const mapStateToProps = (state) => ({
+    check: state.check
+})
+
+export default connect(mapStateToProps, {
+    checkDispatch
+})(Post);
