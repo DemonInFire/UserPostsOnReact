@@ -37,13 +37,13 @@
     position: absolute;
 }
 
-@media (max-width:873px) {
+@media (max-width:885px) {
     .Container {
         width: 46%;
     }
 }
 
-@media (max-width:513px) {
+@media (max-width:527px) {
     .Container {
         width: 95%;
     }
