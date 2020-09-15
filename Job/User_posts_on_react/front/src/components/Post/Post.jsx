@@ -49,7 +49,7 @@ const Post = ({post, check, changeInfo, id}) => {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    check: state.filter(status => status.id === ownProps.id).check
+    check: state[ownProps.id-1]?.check
 })
 
 export default connect(mapStateToProps, {

@@ -4,14 +4,11 @@ const actionTypeAddInfo = 'ADD_INFO'
 const reducerCheck = (state, action) => {
   switch (action.type) {
     case actionTypeChangeInfo:
-      return (state) =>([
-        state.map(status => {
-            if (status.id === action.id) {
-                return status.check
-            }
-            return status
-        })
-    ])
+      let t = [...state]
+      t[action.payload.id - 1].check = !t[action.payload.id - 1].check
+      console.log(t)
+      return t
+      
     case actionTypeAddInfo:
       return [...state, action.payload]
     default:
