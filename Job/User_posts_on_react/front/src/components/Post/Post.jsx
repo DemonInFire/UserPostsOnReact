@@ -1,16 +1,17 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FavoritePostsContext } from '../../context/favoritePostsContext'
 import { CurrentPostContext } from '../../context/currentPostContext'
 import { ModalContext } from '../../context/modalContext'
 import { connect } from 'react-redux'
-import checkDispatch from './../actionCreator/check'
+import changeInfo from './../../actionCreator/changeInfo'
 import style from './Post.module.css'
 
-const Post = ({post, check, checkDispatch}) => {
+const Post = ({post, check, changeInfo, id}) => {
     const {addPost, removePost} = useContext(FavoritePostsContext)
     const {postInformation} = useContext(CurrentPostContext)
     const {toggleModal} = useContext(ModalContext)
-    let checked = check
+    const [checked, setChecked] = useState(check)
+
     const sendInfo = () => {
         postInformation(post.title, post.body)
         toggleModal()
@@ -21,9 +22,11 @@ const Post = ({post, check, checkDispatch}) => {
     }
 
     const handleChanges = () => {
-        checked = !checked
-        checkDispatch(checked)
+        setChecked(!checked)
+        changeInfo(checked, id)
     }
+
+
 
     useEffect(() => {
         checked ? addPost(post.title, post.body, post.id) : removePost(post.id)
@@ -34,7 +37,7 @@ const Post = ({post, check, checkDispatch}) => {
             <input 
                 type="checkbox" 
                 title="add to favorite"
-                checked={checked} 
+                checked={!!checked} 
                 className={style.Button} 
                 onClick={handleChildClick}
                 onChange={handleChanges}
@@ -45,10 +48,10 @@ const Post = ({post, check, checkDispatch}) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    check: state.check
+const mapStateToProps = (state, ownProps) => ({
+    check: state.filter(status => status.id === ownProps.id).check
 })
 
 export default connect(mapStateToProps, {
-    checkDispatch
+    changeInfo
 })(Post);

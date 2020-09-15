@@ -14,6 +14,8 @@ const PostsContextProvider = (props) => {
         fetchData()
     }, [])
 
+    
+
     return (
         <PostsContext.Provider value={{ posts }}>
             {props.children}

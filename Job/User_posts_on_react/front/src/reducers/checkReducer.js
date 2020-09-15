@@ -1,15 +1,19 @@
-const actionTypeCheck = 'CHECKED'
+const actionTypeChangeInfo = 'CHANGE_INFO'
+const actionTypeAddInfo = 'ADD_INFO'
 
-const reducerCheckInitialState = {
-    check: false,
-}
-const reducerCheck = (state = reducerCheckInitialState, action) => {
+const reducerCheck = (state, action) => {
   switch (action.type) {
-    case actionTypeCheck:
-        return {
-            ...state,
-            check: action.check,
-        }
+    case actionTypeChangeInfo:
+      return (state) =>([
+        state.map(status => {
+            if (status.id === action.id) {
+                return status.check
+            }
+            return status
+        })
+    ])
+    case actionTypeAddInfo:
+      return [...state, action.payload]
     default:
       return state
   }
