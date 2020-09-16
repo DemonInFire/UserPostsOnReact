@@ -12,10 +12,10 @@ const UserPosts = ({addInfo}) => {
     const { posts } = useContext(PostsContext)
     const { toggleModal, isModalOpen } = useContext(ModalContext)
     const { state } = useContext(CurrentPostContext)
-
+    
     useEffect(() => {
         posts.map(post => addInfo(false, post.id))
-    },[posts, addInfo])
+    },[posts])
 
     return posts.length ? (
         <>

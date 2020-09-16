@@ -48,9 +48,8 @@ const Post = ({post, check, changeInfo, id}) => {
     )
 }
 
-const mapStateToProps = (state, ownProps) => ({
-    check: state[ownProps.id-1]?.check
-})
+const mapStateToProps = (state, ownProps) => {
+    return state.filter(obj => obj.id === ownProps.id)[0] ? {check: state.filter(obj => obj.id === ownProps.id)[0].check} : (<div class="loader"></div>)}
 
 export default connect(mapStateToProps, {
     changeInfo

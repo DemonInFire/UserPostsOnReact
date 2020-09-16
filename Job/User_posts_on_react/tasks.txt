@@ -1,0 +1,2 @@
+1. useContext for favorite icon
+2. modal window with portals

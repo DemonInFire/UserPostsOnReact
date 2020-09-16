@@ -4,10 +4,9 @@ const actionTypeAddInfo = 'ADD_INFO'
 const reducerCheck = (state, action) => {
   switch (action.type) {
     case actionTypeChangeInfo:
-      let t = [...state]
-      t[action.payload.id - 1].check = !t[action.payload.id - 1].check
-      console.log(t)
-      return t
+      let changeCheck = state.filter(obj => obj.id === action.payload.id)[0]
+      changeCheck.check = !changeCheck.check
+      return state
       
     case actionTypeAddInfo:
       return [...state, action.payload]
