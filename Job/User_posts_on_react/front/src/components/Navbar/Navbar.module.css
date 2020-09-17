@@ -21,4 +21,14 @@ li {
     font-size: 3vh;
     border: solid 5px;
     border-radius: 10px;
+    color: -webkit-link;
+    cursor: pointer;
+    background-color: cornflowerblue;
+    appearance: button;
+    padding: 1px 6px;
+    font-weight: bold;
+}
+
+.NavLink:focus {
+    outline: none;
 }

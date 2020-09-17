@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FavoritePostsContext } from '../../context/favoritePostsContext'
 import { CurrentPostContext } from '../../context/currentPostContext'
-import { ModalContext } from '../../context/modalContext'
+import { ModalContext } from '../../context/modalPostInfoContext'
 import { connect } from 'react-redux'
 import changeInfo from './../../actionCreator/changeInfo'
 import style from './Post.module.css'

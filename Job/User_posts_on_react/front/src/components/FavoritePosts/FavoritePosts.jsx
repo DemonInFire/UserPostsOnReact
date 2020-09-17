@@ -1,17 +1,38 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {FavoritePostsContext} from './../../context/favoritePostsContext'
 import FavoritePost from './../FavoritePost/FavoritePost'
-import { ModalContext } from '../../context/modalContext'
+import { ModalContext } from '../../context/modalPostInfoContext'
 import Modal from '../ModalWindow/Modal'
 import { CurrentPostContext } from '../../context/currentPostContext'
+import { ModalAddPostContext } from '../../context/modalAddInfoContext'
 import style from './FavoritePosts.module.css'
+import * as firebase from 'firebase'
 
 const FavoritePosts = () => {
     const { favoritePosts } = useContext(FavoritePostsContext)
     const { toggleModal, isModalOpen } = useContext(ModalContext)
     const { state } = useContext(CurrentPostContext)
+    const { isAddPostModalOpen, toggleAddPostModalOpen } = useContext(ModalAddPostContext)
 
-    return favoritePosts.length ? (
+    let initialState = {
+        title: '',
+        content: ''
+    }
+
+    const [newPostInfo, setNewPostInfo] = useState(initialState)
+
+    const changeHandler = (e) => {
+        setNewPostInfo({...newPostInfo, [e.target.id]:e.target.value})
+    }
+
+    const createPost = () => {
+        let db = firebase.database()
+        let ref = db.ref('server/saving-data/user-posts')
+        let postsRef = ref.child('posts')
+        postsRef.set({newPostInfo})
+    }
+
+    return (
         <>
             <div className={style.Container}>
                 {
@@ -29,11 +50,53 @@ const FavoritePosts = () => {
                     </div>
                 </Modal>
             }
+            { isAddPostModalOpen &&
+                <Modal>
+                    <div className={style.ModalContainer}>
+                        <button className={style.ModalButton} onClick={toggleAddPostModalOpen}>x</button>
+                        <div className={style.Content}>
+                            <div>
+                                <div>
+                                    <label>Title</label>
+                                </div>
+                                <div>
+                                    <input 
+                                        type="text" 
+                                        id="title" 
+                                        name="title" 
+                                        placeholder="Input post title" 
+                                        onChange={changeHandler}
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <label>Content</label>
+                                </div>
+                                <div className={style.TextArea}>
+                                    <textarea 
+                                        id="content" 
+                                        name="content" 
+                                        placeholder="Input post content" 
+                                        rows="6" 
+                                        onChange={changeHandler}
+                                        required 
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <input 
+                                    type="submit" 
+                                    value="Submit" 
+                                    onClick={createPost}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </Modal>
+            }
         </>
-    ) : (
-        <div className={style.Container}>
-            There are no favorite posts
-        </div>
     )
 }
 

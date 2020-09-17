@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "./Navbar.module.css";
 import UserPosts from './../UserPosts/UserPosts';
 import FavoritePosts from './../FavoritePosts/FavoritePosts';
 import {BrowserRouter as Router, NavLink, Switch, Route, Redirect} from 'react-router-dom'
+import { ModalAddPostContext } from "../../context/modalAddInfoContext";
 
 const Navbar = () => {
+  const {toggleAddPostModalOpen} = useContext(ModalAddPostContext)
+
+  const sendInfo = () => {
+    toggleAddPostModalOpen()
+  }
+
   return (
     <Router>
         <nav>
@@ -32,6 +39,14 @@ const Navbar = () => {
               >
                 Favorite
               </NavLink>
+            </li>
+            <li>
+              <button 
+                className={style.NavLink}
+                onClick={sendInfo}
+              >
+                Add Post
+              </button>
             </li>
           </ul>
         </nav>
