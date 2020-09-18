@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState} from "react";
 import { FavoritePostsContext } from "./../../context/favoritePostsContext";
 import FavoritePost from "./../FavoritePost/FavoritePost";
 import { ModalContext } from "../../context/modalPostInfoContext";
@@ -41,11 +41,15 @@ const FavoritePosts = () => {
     setLoader(true);
     let db = await firebase.database();
     let ref = await db.ref("server/saving-data/user-posts");
-    ref.set({ newPostInfo });
-    // setSuccess(true)
+    ref.set({ newPostInfo }).then(setSuccess(true))
     setNewPostInfo(initialState);
     setPostValid(validStatus);
   };
+
+  const onClose = () => {
+    toggleAddPostModalOpen()
+    setLoader(false)
+  }
 
   return (
     <>
@@ -70,7 +74,7 @@ const FavoritePosts = () => {
           <div className={style.ModalContainer}>
             <button
               className={style.ModalButton}
-              onClick={toggleAddPostModalOpen}
+              onClick={onClose}
             >
               x
             </button>

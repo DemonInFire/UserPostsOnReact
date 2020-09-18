@@ -47,11 +47,15 @@ const UserPosts = ({ addInfo }) => {
     setLoader(true);
     let db = await firebase.database();
     let ref = await db.ref("server/saving-data/user-posts");
-    ref.set({ newPostInfo });
-    setSuccess(true)
+    ref.set({ newPostInfo }).then(setSuccess(true))
     setNewPostInfo(initialState);
     setPostValid(validStatus);
   };
+
+  const onClose = () => {
+    toggleAddPostModalOpen()
+    setLoader(false)
+  }
 
   return (
     <>
@@ -76,7 +80,7 @@ const UserPosts = ({ addInfo }) => {
           <div className={style.ModalContainer}>
             <button
               className={style.ModalButton}
-              onClick={toggleAddPostModalOpen}
+              onClick={onClose}
             >
               x
             </button>
