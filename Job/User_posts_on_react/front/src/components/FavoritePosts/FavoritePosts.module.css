@@ -68,14 +68,20 @@ input[type=submit]:disabled {
 
 .Loader {
     border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
+    border-top: 5px solid yellowgreen;
+    border-right: 16px solid grey;
+    border-bottom: 5px solid yellowgreen;
+    border-left: 16px solid grey;
     border-radius: 50%;
+    margin-left: 180px;
+    margin-top: 30px;
     width: 120px;
     height: 120px;
-    animation: spin 2s linear infinite;
-  }
+    animation: spin 0.5s linear infinite;
+
+}
   
-  @keyframes spin {
+@keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
+}

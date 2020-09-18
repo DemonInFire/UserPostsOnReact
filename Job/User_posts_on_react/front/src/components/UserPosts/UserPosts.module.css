@@ -60,3 +60,27 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #45a049;
 }
+
+input[type=submit]:disabled {
+    background-color: #d1d1e0;
+}
+
+.Loader {
+    border: 16px solid #f3f3f3;
+    border-top: 5px solid yellowgreen;
+    border-right: 16px solid grey;
+    border-bottom: 5px solid yellowgreen;
+    border-left: 16px solid grey;
+    border-radius: 50%;
+    margin-left: 180px;
+    margin-top: 30px;
+    width: 120px;
+    height: 120px;
+    animation: spin 0.5s linear infinite;
+
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
