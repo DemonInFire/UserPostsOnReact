@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { PostsContext } from '../../context/postsContext'
 import Post from './../Post/Post'
 import Modal from '../ModalWindow/Modal'
@@ -8,6 +8,7 @@ import { CurrentPostContext } from '../../context/currentPostContext'
 import { connect } from 'react-redux'
 import addInfo from './../../actionCreator/addInfo'
 import { ModalAddPostContext } from '../../context/modalAddInfoContext'
+import * as firebase from 'firebase'
 
 const UserPosts = ({addInfo}) => {
     const { posts } = useContext(PostsContext)
@@ -19,7 +20,37 @@ const UserPosts = ({addInfo}) => {
         posts.map(post => addInfo(false, post.id))
     },[posts])
 
-    return posts.length ? (
+    let initialState = {
+        title: '',
+        content: '',
+    }
+
+    const validStatus = true
+    const loaderState = false
+
+    const [newPostInfo, setNewPostInfo] = useState(initialState)
+    const [isPostValid, setPostValid] = useState(validStatus)
+    const [isLoader, setLoader] = useState(loaderState)
+
+    const changeHandler = (e) => {
+        setNewPostInfo({...newPostInfo, [e.target.id]:e.target.value})
+        newPostInfo.title.length > 1 && newPostInfo.content.length > 1 ? setPostValid(false) : setPostValid(true)
+    }
+
+    const createPost = () => {
+        (async () => {
+            setLoader(true)
+            let db = await firebase.database()
+            let ref = await db.ref('server/saving-data/user-posts')
+            ref.set({newPostInfo})
+            setLoader(false)
+        })()
+        
+        setNewPostInfo(initialState)
+        setPostValid(validStatus)
+    }
+
+    return (
         <>
             <div className={style.Container}>
                 {
@@ -41,35 +72,57 @@ const UserPosts = ({addInfo}) => {
                 <Modal>
                     <div className={style.ModalContainer}>
                         <button className={style.ModalButton} onClick={toggleAddPostModalOpen}>x</button>
-                        <div className={style.Content}>
-                            <div>
+                        {isLoader ? (
+                            <div className={style.Loader}></div>
+                        ) : (
+                            <div className={style.Content}>
                                 <div>
-                                    <label for="fname">Title</label>
-                                </div>
+                                    <div>
+                                        <label>Title</label>
+                                    </div>
                                 <div>
-                                    <input type="text" id="fname" name="firstname" placeholder="Input post title" />
+                                    <input 
+                                        type="text" 
+                                        id="title" 
+                                        name="title"
+                                        value={newPostInfo.title} 
+                                        placeholder="Input post title" 
+                                        onChange={changeHandler}
+                                        required
+                                    />
                                 </div>
                             </div>
                             <div>
                                 <div>
-                                    <label for="fname">Content</label>
+                                    <label>Content</label>
                                 </div>
                                 <div className={style.TextArea}>
-                                    <textarea id="subject" name="subject" placeholder="Input post content" rows="6"></textarea>
+                                    <textarea 
+                                        id="content" 
+                                        name="content" 
+                                        placeholder="Input post content"
+                                        value={newPostInfo.content} 
+                                        rows="6" 
+                                        onChange={changeHandler}
+                                        required 
+                                    />
                                 </div>
                             </div>
                             <div>
-                                <input type="submit" value="Submit" />
+                                <input 
+                                    type="submit" 
+                                    value="Submit" 
+                                    onClick={createPost}
+                                    disabled={isPostValid}
+                                />
                             </div>
                         </div>
+                        )
+                        }
                     </div>
                 </Modal>
             }
          </>
-    ) : (
-        <div>
-            There are no posts left
-        </div>
     )
 }
 
