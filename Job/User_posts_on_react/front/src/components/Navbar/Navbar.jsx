@@ -5,12 +5,18 @@ import FavoritePosts from './../FavoritePosts/FavoritePosts';
 import {BrowserRouter as Router, NavLink, Switch, Route, Redirect} from 'react-router-dom'
 import { ModalAddPostContext } from "../../context/modalAddInfoContext";
 import CustomPosts from "../CustomPosts/CustomPosts";
+import { PostsContext } from "../../context/postsContext";
 
 const Navbar = () => {
   const {toggleAddPostModalOpen} = useContext(ModalAddPostContext)
+  const {searchInfo, setUpdatePosts} = useContext(PostsContext)
 
   const sendInfo = () => {
     toggleAddPostModalOpen()
+  }
+
+  const getInfo = (e) => {
+    searchInfo(e.target.value) 
   }
 
   return (
@@ -42,14 +48,6 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <button 
-                className={style.NavLink}
-                onClick={sendInfo}
-              >
-                Add Post
-              </button>
-            </li>
-            <li>
               <NavLink
                 className={style.NavLink} 
                 to="/customPosts"
@@ -60,6 +58,17 @@ const Navbar = () => {
               >
                   Custom Posts
               </NavLink>
+            </li>
+            <li>
+              <button 
+                className={style.NavLink}
+                onClick={sendInfo}
+              >
+                Add Post
+              </button>
+            </li>
+            <li className={style.Input}>
+              <input type="text" id="filter" placeholder="Search for..." className={style.Search} onChange={getInfo}/>
             </li>
           </ul>
         </nav>

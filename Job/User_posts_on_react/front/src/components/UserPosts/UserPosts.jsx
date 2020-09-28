@@ -11,7 +11,7 @@ import { ModalAddPostContext } from "../../context/modalAddInfoContext";
 import * as firebase from "firebase";
 
 const UserPosts = ({ addInfo }) => {
-  const { posts } = useContext(PostsContext);
+  const { posts, updatePosts } = useContext(PostsContext);
   const { toggleModal, isModalOpen } = useContext(ModalContext);
   const { state } = useContext(CurrentPostContext);
   const { isAddPostModalOpen, toggleAddPostModalOpen } = useContext(
@@ -47,22 +47,24 @@ const UserPosts = ({ addInfo }) => {
     setLoader(true);
     let db = await firebase.database();
     let ref = await db.ref("server/saving-data/user-posts");
-    ref.set({ newPostInfo }).then(setSuccess(true))
+    ref.set({ newPostInfo }).then(setSuccess(true));
     setNewPostInfo(initialState);
     setPostValid(validStatus);
   };
 
   const onClose = () => {
-    toggleAddPostModalOpen()
-    setLoader(false)
-  }
+    toggleAddPostModalOpen();
+    setLoader(false);
+  };
 
   return (
     <>
       <div className={style.Container}>
-        {posts.map((post) => {
-          return <Post post={post} key={post.id} id={post.id} />;
-        })}
+        {updatePosts.length != 0
+          ? updatePosts.map((post) => {
+              return <Post post={post} key={post.id} id={post.id} />;
+            })
+          : (<div>Find no posts</div>)}
       </div>
       {isModalOpen && (
         <Modal>
@@ -78,10 +80,7 @@ const UserPosts = ({ addInfo }) => {
       {isAddPostModalOpen && (
         <Modal>
           <div className={style.ModalContainer}>
-            <button
-              className={style.ModalButton}
-              onClick={onClose}
-            >
+            <button className={style.ModalButton} onClick={onClose}>
               x
             </button>
             {isLoader ? (

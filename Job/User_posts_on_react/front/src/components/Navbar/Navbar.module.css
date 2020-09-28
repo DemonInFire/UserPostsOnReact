@@ -6,13 +6,10 @@ ul {
     background-color: cornflowerblue;
     list-style-type: none;
     margin: 0;
-    padding: 3vh;
-    overflow: hidden;
-    height: 32%;
-}
-
-li {
-    display: inline;
+    padding: 1.7vh;
+    height: 66%;
+    display: flex;
+    flex-direction: row;
 }
 
 .NavLink {
@@ -30,5 +27,16 @@ li {
 }
 
 .NavLink:focus {
+    outline: none;
+}
+
+.Input {
+    position: absolute;
+    width: 30vh;
+    right: 30px;
+    top: 10px;
+}
+
+.Search:focus {
     outline: none;
 }

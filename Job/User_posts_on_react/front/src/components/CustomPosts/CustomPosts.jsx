@@ -66,6 +66,13 @@ const CustomPosts = () => {
       });
   }, []);
 
+//   const findPost = (info) => {
+//     firebase
+//         .firestore()
+//         .collection("CustomPosts")
+//         .whereField("title")
+//   } 
+
   return (
     <>
       <div className={style.Container}>
@@ -85,7 +92,7 @@ const CustomPosts = () => {
               x
             </button>
             <h2 className={style.ModalTitle}>{state.title}</h2>
-            <div className={style.ModalContent}>{state.content}</div>
+            <div className={style.ModalContent}>{state.body}</div>
           </div>
         </Modal>
       )}

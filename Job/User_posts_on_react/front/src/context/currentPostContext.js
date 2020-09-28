@@ -5,10 +5,10 @@ export const CurrentPostContext = createContext()
 const CurrentPostContextProvider = (props) => {
     const [state, setState] = useState({})
 
-    const postInformation = (title, content) => {
+    const postInformation = (title, body) => {
         setState({
             title,
-            content
+            body
         })
     }
 
