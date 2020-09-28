@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import * as firebase from "firebase";
 import style from "./CustomPosts.module.css";
 import { ModalContext } from "../../context/modalPostInfoContext";
-import Post from "./../Post/Post";
 import Modal from "./../ModalWindow/Modal";
 import { connect } from "react-redux";
 import addInfo from "./../../actionCreator/addInfo";
 import { ModalAddPostContext } from "../../context/modalAddInfoContext";
 import { CurrentPostContext } from "../../context/currentPostContext";
+import CustomPost from "./../CustomPost/CustomPost";
 
 const CustomPosts = () => {
   const { toggleModal, isModalOpen } = useContext(ModalContext);
@@ -72,7 +72,7 @@ const CustomPosts = () => {
         {customPosts.map((post) => {
           addInfo(false, post.id);
           return post ? (
-            <Post post={post.newPostInfo} key={post.id} id={post.id}/>
+            <CustomPost post={post.newPostInfo} key={post.id} id={post.id}/>
           ) : (
             <div>There is no custom posts</div>
           );

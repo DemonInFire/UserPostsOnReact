@@ -1,0 +1,41 @@
+.Container {
+    width: 31%;
+    border: 2px ridge #3E50F3;
+    margin: 3px;
+    padding: 5px;
+    border-radius: 3px;
+    position:relative;
+    max-height: 30vh;
+}
+
+.Container:hover {
+    cursor: pointer;
+    background:#53ea93;
+}
+
+.Title {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.Button {
+    position:absolute;
+    top:0;
+    right:0;
+    background-image: url(./../../img/delete.jpg);
+    cursor:pointer;
+    height: 32px;
+    width: 32px;
+}
+
+@media (max-width:885px) {
+    .Container {
+        width: 46%;
+    }
+}
+
+@media (max-width:527px) {
+    .Container {
+        width: 95%;
+    }
+}
