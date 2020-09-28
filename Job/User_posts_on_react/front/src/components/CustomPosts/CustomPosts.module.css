@@ -1,0 +1,97 @@
+.Container {
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    border: 4px solid blue;
+    border-radius: 8px;
+    margin: 2px;
+    height: 92%;
+}
+
+.ModalContainer {
+    max-height: 60vh;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 30px;
+    padding-top: 20px;
+    padding-bottom: 60px;
+}
+
+.PostContainer {
+    width: 31%;
+    border: 2px ridge #3E50F3;
+    margin: 3px;
+    padding: 5px;
+    border-radius: 3px;
+    position:relative;
+    max-height: 15vh;
+}
+
+.ModalTitle {
+    font-size: 40px;
+}
+
+.ModalContent {
+    padding: 4px;
+    font-size: 20px;
+}
+
+.ModalButton {
+    position:absolute;
+    font-size:30px;
+    border: none;
+    z-index: 0;
+    background-color: #fff;
+    top:0;
+    right:15px;
+    cursor:pointer;
+}
+
+input[type=text], textarea {
+    width: 96%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+input[type=submit]:disabled {
+    background-color: #d1d1e0;
+}
+
+.Loader {
+    border: 16px solid #f3f3f3;
+    border-top: 5px solid yellowgreen;
+    border-right: 16px solid grey;
+    border-bottom: 5px solid yellowgreen;
+    border-left: 16px solid grey;
+    border-radius: 50%;
+    margin-left: 180px;
+    margin-top: 30px;
+    width: 120px;
+    height: 120px;
+    animation: spin 0.5s linear infinite;
+
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

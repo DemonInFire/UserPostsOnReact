@@ -5,6 +5,7 @@
     padding: 5px;
     border-radius: 3px;
     position:relative;
+    max-height: 30vh;
 }
 
 .Container:hover {

@@ -24,7 +24,7 @@ const UserPosts = ({ addInfo }) => {
 
   let initialState = {
     title: "",
-    content: "",
+    body: "",
   };
 
   const validStatus = true;
@@ -38,7 +38,7 @@ const UserPosts = ({ addInfo }) => {
 
   const changeHandler = (e) => {
     setNewPostInfo({ ...newPostInfo, [e.target.id]: e.target.value });
-    newPostInfo.title.length > 1 && newPostInfo.content.length > 1
+    newPostInfo.title.length > 1 && newPostInfo.body.length > 1
       ? setPostValid(false)
       : setPostValid(true);
   };
@@ -71,7 +71,7 @@ const UserPosts = ({ addInfo }) => {
               x
             </button>
             <h2 className={style.ModalTitle}>{state.title}</h2>
-            <div className={style.ModalContent}>{state.content}</div>
+            <div className={style.ModalContent}>{state.body}</div>
           </div>
         </Modal>
       )}
@@ -116,10 +116,10 @@ const UserPosts = ({ addInfo }) => {
                   </div>
                   <div className={style.TextArea}>
                     <textarea
-                      id="content"
+                      id="body"
                       name="content"
                       placeholder="Input post content"
-                      value={newPostInfo.content}
+                      value={newPostInfo.body}
                       rows="6"
                       onChange={changeHandler}
                       required

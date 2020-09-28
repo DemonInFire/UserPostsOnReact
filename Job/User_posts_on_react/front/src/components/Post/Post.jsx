@@ -29,7 +29,7 @@ const Post = ({post, check, changeInfo, id}) => {
 
 
     useEffect(() => {
-        checked ? addPost(post.title, post.body, post.id) : removePost(post.id)
+        checked ? addPost(post.title, post.body, id) : removePost(id)
     },[checked])
     
     return (

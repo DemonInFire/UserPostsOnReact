@@ -18,7 +18,7 @@ const FavoritePosts = () => {
 
   let initialState = {
     title: "",
-    content: "",
+    body: "",
   };
 
   const validStatus = true;
@@ -32,16 +32,16 @@ const FavoritePosts = () => {
 
   const changeHandler = (e) => {
     setNewPostInfo({ ...newPostInfo, [e.target.id]: e.target.value });
-    newPostInfo.title.length > 1 && newPostInfo.content.length > 1
+    newPostInfo.title.length > 1 && newPostInfo.body.length > 1
       ? setPostValid(false)
       : setPostValid(true);
   };
 
   const createPost = async () => {
     setLoader(true);
-    let db = await firebase.database();
-    let ref = await db.ref("server/saving-data/user-posts");
-    ref.set({ newPostInfo }).then(setSuccess(true))
+    let store = await firebase.firestore();
+    let ref = await store.collection("CustomPosts");
+    ref.add({ newPostInfo }).then(setSuccess(true))
     setNewPostInfo(initialState);
     setPostValid(validStatus);
   };
@@ -65,7 +65,7 @@ const FavoritePosts = () => {
               x
             </button>
             <h2 className={style.ModalTitle}>{state.title}</h2>
-            <div className={style.ModalContent}>{state.content}</div>
+            <div className={style.ModalContent}>{state.body}</div>
           </div>
         </Modal>
       )}
@@ -110,10 +110,10 @@ const FavoritePosts = () => {
                   </div>
                   <div className={style.TextArea}>
                     <textarea
-                      id="content"
+                      id="body"
                       name="content"
                       placeholder="Input post content"
-                      value={newPostInfo.content}
+                      value={newPostInfo.body}
                       rows="6"
                       onChange={changeHandler}
                       required

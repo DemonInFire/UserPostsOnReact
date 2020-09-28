@@ -4,6 +4,7 @@ import UserPosts from './../UserPosts/UserPosts';
 import FavoritePosts from './../FavoritePosts/FavoritePosts';
 import {BrowserRouter as Router, NavLink, Switch, Route, Redirect} from 'react-router-dom'
 import { ModalAddPostContext } from "../../context/modalAddInfoContext";
+import CustomPosts from "../CustomPosts/CustomPosts";
 
 const Navbar = () => {
   const {toggleAddPostModalOpen} = useContext(ModalAddPostContext)
@@ -48,6 +49,18 @@ const Navbar = () => {
                 Add Post
               </button>
             </li>
+            <li>
+              <NavLink
+                className={style.NavLink} 
+                to="/customPosts"
+                activeStyle={{
+                  fontWeight: "bold",
+                  color: "green"
+                }}
+              >
+                  Custom Posts
+              </NavLink>
+            </li>
           </ul>
         </nav>
         <Switch>
@@ -56,6 +69,9 @@ const Navbar = () => {
           </Route>
           <Route path="/posts">
             <UserPosts />
+          </Route>
+          <Route path="/customPosts">
+            <CustomPosts />
           </Route>
           <Redirect strict from="/" to="/posts" />
         </Switch>
