@@ -9,7 +9,7 @@ import { PostsContext } from "../../context/postsContext";
 
 const Navbar = () => {
   const {toggleAddPostModalOpen} = useContext(ModalAddPostContext)
-  const {searchInfo, setUpdatePosts} = useContext(PostsContext)
+  const {searchInfo} = useContext(PostsContext)
 
   const sendInfo = () => {
     toggleAddPostModalOpen()

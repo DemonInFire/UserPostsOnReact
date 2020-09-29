@@ -60,7 +60,7 @@ const UserPosts = ({ addInfo }) => {
   return (
     <>
       <div className={style.Container}>
-        {updatePosts.length != 0
+        {updatePosts.length !== 0
           ? updatePosts.map((post) => {
               return <Post post={post} key={post.id} id={post.id} />;
             })
