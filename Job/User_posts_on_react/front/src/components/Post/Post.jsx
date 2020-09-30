@@ -6,8 +6,9 @@ import { PostsContext } from "../../context/postsContext";
 import { connect } from 'react-redux'
 import changeInfo from './../../actionCreator/changeInfo'
 import style from './Post.module.css'
+import { SortableElement } from "react-sortable-hoc";
 
-const Post = ({post, check, changeInfo, id}) => {
+const Post = SortableElement(({post, check, changeInfo, id, index}) => {
     const {addPost, removePost} = useContext(FavoritePostsContext)
     const {postInformation} = useContext(CurrentPostContext)
     const {toggleModal} = useContext(ModalContext)
@@ -34,7 +35,7 @@ const Post = ({post, check, changeInfo, id}) => {
     },[checked])
 
     return (
-        <div className={style.Container} onClick={sendInfo}>
+        <div className={style.Container} onClick={sendInfo} key={id} index={index}>
             <input 
                 type="checkbox" 
                 title="add to favorite"
@@ -55,7 +56,7 @@ const Post = ({post, check, changeInfo, id}) => {
             <div>{post.body}</div>
         </div>   
     )
-}
+})
 
 const mapStateToProps = (state, ownProps) => {
     return state.filter(obj => obj.id === ownProps.id)[0] ? {check: state.filter(obj => obj.id === ownProps.id)[0].check} : (<div class="loader"></div>)}

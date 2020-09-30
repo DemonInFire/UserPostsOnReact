@@ -24,6 +24,7 @@ const PostsContextProvider = (props) => {
     const searchInfo = (info) => {
         if (info.length > 3) {
             let find = posts.filter(post => post.title.includes(`${info}`) === true)
+            
             setUpdatePosts(find)
             setInfo(info)
         } else {

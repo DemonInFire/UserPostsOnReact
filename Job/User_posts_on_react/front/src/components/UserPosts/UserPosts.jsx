@@ -9,8 +9,9 @@ import { connect } from "react-redux";
 import addInfo from "./../../actionCreator/addInfo";
 import { ModalAddPostContext } from "../../context/modalAddInfoContext";
 import * as firebase from "firebase";
+import { SortableContainer } from "react-sortable-hoc";
 
-const UserPosts = ({ addInfo }) => {
+const UserPosts = SortableContainer(({ addInfo }) => {
   const { posts, updatePosts } = useContext(PostsContext);
   const { toggleModal, isModalOpen } = useContext(ModalContext);
   const { state } = useContext(CurrentPostContext);
@@ -19,7 +20,9 @@ const UserPosts = ({ addInfo }) => {
   );
 
   useEffect(() => {
-    posts.map((post) => addInfo(false, post.id));
+    posts.map((post) => {
+      addInfo(false, post.id);
+    });
   }, [posts]);
 
   let initialState = {
@@ -56,17 +59,25 @@ const UserPosts = ({ addInfo }) => {
     toggleAddPostModalOpen();
     setLoader(false);
   };
-
   return (
     <>
       <div className={style.Container}>
-        {updatePosts.length !== 0
-          ? updatePosts.map((post) => {
-              return <Post post={post} key={post.id} id={post.id} />;
-            })
-          : (<div>Find no posts</div>)}
+        {updatePosts.length !== 0 ? (
+          updatePosts
+            .sort((a, b) => a.userId - b.userId)
+            .map((post, index=post.userId) => (
+                <Post
+                  post={post}
+                  key={post.id}
+                  id={post.id}
+                  index={index}
+                />
+            ))
+        ) : (
+          <div>Find no posts</div>
+        )}
       </div>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <Modal>
           <div className={style.ModalContainer}>
             <button className={style.ModalButton} onClick={toggleModal}>
@@ -76,7 +87,7 @@ const UserPosts = ({ addInfo }) => {
             <div className={style.ModalContent}>{state.body}</div>
           </div>
         </Modal>
-      )}
+      )} */}
       {isAddPostModalOpen && (
         <Modal>
           <div className={style.ModalContainer}>
@@ -140,7 +151,7 @@ const UserPosts = ({ addInfo }) => {
       )}
     </>
   );
-};
+});
 
 export { UserPosts };
 export default connect(null, { addInfo })(UserPosts);

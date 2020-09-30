@@ -6,10 +6,11 @@ import {BrowserRouter as Router, NavLink, Switch, Route, Redirect} from 'react-r
 import { ModalAddPostContext } from "../../context/modalAddInfoContext";
 import CustomPosts from "../CustomPosts/CustomPosts";
 import { PostsContext } from "../../context/postsContext";
+import arrayMove from 'array-move'
 
 const Navbar = () => {
-  const {toggleAddPostModalOpen} = useContext(ModalAddPostContext)
-  const {searchInfo} = useContext(PostsContext)
+  const { toggleAddPostModalOpen } = useContext(ModalAddPostContext)
+  const { searchInfo, updatePosts, setUpdatePosts } = useContext(PostsContext)
 
   const sendInfo = () => {
     toggleAddPostModalOpen()
@@ -17,6 +18,14 @@ const Navbar = () => {
 
   const getInfo = (e) => {
     searchInfo(e.target.value) 
+  }
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    let arr = arrayMove(updatePosts, oldIndex, newIndex)
+    for (let i = 0; i < arr.length; i++){
+      arr[i].userId = i
+    }
+    setUpdatePosts(arr)
   }
 
   return (
@@ -77,7 +86,7 @@ const Navbar = () => {
             <FavoritePosts />
           </Route>
           <Route path="/posts">
-            <UserPosts />
+            <UserPosts onSortEnd={onSortEnd} axis='xy' />
           </Route>
           <Route path="/customPosts">
             <CustomPosts />
