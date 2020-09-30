@@ -35,7 +35,7 @@ const Post = SortableElement(({post, check, changeInfo, id, index}) => {
     },[checked])
 
     return (
-        <div className={style.Container} onClick={sendInfo} key={id} index={index}>
+        <div className={style.Container} key={id} index={index}>
             <input 
                 type="checkbox" 
                 title="add to favorite"
@@ -44,6 +44,7 @@ const Post = SortableElement(({post, check, changeInfo, id, index}) => {
                 onClick={handleChildClick}
                 onChange={handleChanges}
             />
+            <input type="image" src={require('./../../img/search.svg')} title="watch" alt="watch" class={style.searchIcon} onClick={sendInfo}/>
             {info ?
                 <h3 className={style.Title}>
                     {post.title.slice(0,post.title.indexOf(info))}

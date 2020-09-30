@@ -6,6 +6,7 @@
     border-radius: 3px;
     position:relative;
     max-height: 30vh;
+    background-color: #a879c7;
 }
 
 .Container:hover {

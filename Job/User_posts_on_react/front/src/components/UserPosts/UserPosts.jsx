@@ -77,7 +77,7 @@ const UserPosts = SortableContainer(({ addInfo }) => {
           <div>Find no posts</div>
         )}
       </div>
-      {/* {isModalOpen && (
+      {isModalOpen && (
         <Modal>
           <div className={style.ModalContainer}>
             <button className={style.ModalButton} onClick={toggleModal}>
@@ -87,7 +87,7 @@ const UserPosts = SortableContainer(({ addInfo }) => {
             <div className={style.ModalContent}>{state.body}</div>
           </div>
         </Modal>
-      )} */}
+      )}
       {isAddPostModalOpen && (
         <Modal>
           <div className={style.ModalContainer}>
