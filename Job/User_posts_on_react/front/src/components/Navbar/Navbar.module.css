@@ -24,6 +24,24 @@ ul {
     appearance: button;
     padding: 1px 6px;
     font-weight: bold;
+    position: relative;
+    z-index: 10;
+}
+
+.NavLinkTarget {
+    text-decoration: none;
+    margin: 5px;
+    font-size: 3vh;
+    border: solid 5px;
+    border-radius: 10px;
+    color: -webkit-link;
+    cursor: pointer;
+    background-color: gold;
+    appearance: button;
+    padding: 1px 6px;
+    font-weight: bold;
+    position: relative;
+    z-index: 10;
 }
 
 .NavLink:focus {

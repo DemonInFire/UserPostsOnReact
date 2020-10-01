@@ -8,22 +8,26 @@ import Navbar from './components/Navbar/Navbar';
 import { Provider } from 'react-redux';
 import ModalAddPostContextProvider from './context/modalAddInfoContext'
 import store from './store/reduxStore'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 function App() {
   return (
     <Provider store={store}>
       <div className={style.Main}>
-        <ModalAddPostContextProvider>
-          <ModalContextProvider>
-            <CurrentPostContextProvider>
-              <FavoritePostsContextProvider>
-                <PostsContextProvider>
-                  <Navbar />
-                </PostsContextProvider>
-              </FavoritePostsContextProvider>
-            </CurrentPostContextProvider>
-          </ModalContextProvider>
-        </ModalAddPostContextProvider>
+        <DndProvider backend={HTML5Backend}>
+          <ModalAddPostContextProvider>
+            <ModalContextProvider>
+              <CurrentPostContextProvider>
+                <FavoritePostsContextProvider>
+                  <PostsContextProvider>
+                    <Navbar />
+                  </PostsContextProvider>
+                </FavoritePostsContextProvider>
+              </CurrentPostContextProvider>
+            </ModalContextProvider>
+          </ModalAddPostContextProvider>
+        </DndProvider>
       </div>
     </Provider>
   );

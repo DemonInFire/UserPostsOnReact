@@ -7,6 +7,20 @@
     position:relative;
     max-height: 30vh;
     background-color: #a879c7;
+    z-index: 5;
+}
+
+.ContainerInMove {
+    width: 31%;
+    border: 2px ridge #3E50F3;
+    margin: 3px;
+    padding: 5px;
+    border-radius: 3px;
+    position:relative;
+    max-height: 30vh;
+    background-color: #a879c7;
+    z-index: 0;
+    opacity: 0;
 }
 
 .Container:hover {

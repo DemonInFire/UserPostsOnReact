@@ -21,6 +21,10 @@ const PostsContextProvider = (props) => {
         fetchData()
     }, [])
 
+    useEffect(() => {
+        setUpdatePosts(posts)
+    }, [posts])
+
     const searchInfo = (info) => {
         if (info.length > 3) {
             let find = posts.filter(post => post.title.includes(`${info}`) === true)    
@@ -32,13 +36,18 @@ const PostsContextProvider = (props) => {
         }
     }
 
+    const removePost = (id) => {
+        setPosts(posts.filter(post => post.id !== id))
+    }
+
     return ( <PostsContext.Provider value = {
             {
                 posts,
                 searchInfo,
                 updatePosts,
                 setUpdatePosts,
-                info
+                info,
+                removePost
             }
         } > {
             props.children

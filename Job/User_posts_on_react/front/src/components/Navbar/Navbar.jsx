@@ -5,12 +5,16 @@ import FavoritePosts from './../FavoritePosts/FavoritePosts';
 import {BrowserRouter as Router, NavLink, Switch, Route, Redirect} from 'react-router-dom'
 import { ModalAddPostContext } from "../../context/modalAddInfoContext";
 import CustomPosts from "../CustomPosts/CustomPosts";
+import { FavoritePostsContext } from './../../context/favoritePostsContext'
 import { PostsContext } from "../../context/postsContext";
+import { ItemTypes } from './../../utils/posts'
 import arrayMove from 'array-move'
+import { useDrop } from 'react-dnd'
 
 const Navbar = () => {
   const { toggleAddPostModalOpen } = useContext(ModalAddPostContext)
-  const { searchInfo, updatePosts, setUpdatePosts } = useContext(PostsContext)
+  const { searchInfo, updatePosts, setUpdatePosts, removePost } = useContext(PostsContext)
+  const { addPost } = useContext(FavoritePostsContext)
 
   const sendInfo = () => {
     toggleAddPostModalOpen()
@@ -27,6 +31,19 @@ const Navbar = () => {
     }
     setUpdatePosts(arr)
   }
+
+  const handleChanges = (item) => {
+    addPost(item.title, item.body, item.id)
+    removePost(item.id)
+  }
+
+  const [{ isOver }, drop] = useDrop({
+    accept: ItemTypes.POST,
+    drop: (item, monitor) => handleChanges(item),
+    collect: monitor => ({
+      isOver: !!monitor.isOver(),
+    })
+  })
 
   return (
     <Router>
@@ -46,7 +63,8 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink 
-                className={style.NavLink}
+                ref={drop}
+                className={isOver ? style.NavLinkTarget : style.NavLink}
                 to="/favorite"
                 activeStyle={{
                   fontWeight: "bold",

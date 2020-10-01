@@ -151,7 +151,7 @@ const UserPosts = SortableContainer(({ addInfo }) => {
       )}
     </>
   );
-});
+})
 
 export { UserPosts };
 export default connect(null, { addInfo })(UserPosts);
