@@ -66,13 +66,6 @@ const CustomPosts = () => {
       });
   }, []);
 
-//   const findPost = (info) => {
-//     firebase
-//         .firestore()
-//         .collection("CustomPosts")
-//         .whereField("title")
-//   } 
-
   return (
     <>
       <div className={style.Container}>

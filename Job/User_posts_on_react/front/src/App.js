@@ -11,7 +11,7 @@ import store from './store/reduxStore'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <div className={style.Main}>

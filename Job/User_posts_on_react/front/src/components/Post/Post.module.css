@@ -8,6 +8,7 @@
     max-height: 30vh;
     background-color: #a879c7;
     z-index: 5;
+    transition: 0.5s;
 }
 
 .ContainerInMove {
@@ -19,7 +20,7 @@
     position:relative;
     max-height: 30vh;
     background-color: #a879c7;
-    z-index: 0;
+    z-index: 7;
     opacity: 0;
 }
 
