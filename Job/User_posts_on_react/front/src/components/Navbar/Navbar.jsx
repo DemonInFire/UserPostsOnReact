@@ -8,12 +8,11 @@ import CustomPosts from "../CustomPosts/CustomPosts";
 import { FavoritePostsContext } from './../../context/favoritePostsContext'
 import { PostsContext } from "../../context/postsContext";
 import { ItemTypes } from './../../utils/posts'
-import arrayMove from 'array-move'
 import { useDrop } from 'react-dnd'
 
 const Navbar = () => {
   const { toggleAddPostModalOpen } = useContext(ModalAddPostContext)
-  const { searchInfo, updatePosts, setUpdatePosts, removePost } = useContext(PostsContext)
+  const { searchInfo, removePost } = useContext(PostsContext)
   const { addPost } = useContext(FavoritePostsContext)
 
   const sendInfo = () => {
@@ -22,14 +21,6 @@ const Navbar = () => {
 
   const getInfo = (e) => {
     searchInfo(e.target.value) 
-  }
-
-  const onSortEnd = ({ oldIndex, newIndex }) => {
-    let arr = arrayMove(updatePosts, oldIndex, newIndex)
-    for (let i = 0; i < arr.length; i++){
-      arr[i].userId = i
-    }
-    setUpdatePosts(arr)
   }
 
   const handleChanges = (item) => {
@@ -104,7 +95,7 @@ const Navbar = () => {
             <FavoritePosts />
           </Route>
           <Route path="/posts">
-            <UserPosts onSortEnd={onSortEnd} axis='xy' />
+            <UserPosts />
           </Route>
           <Route path="/customPosts">
             <CustomPosts />

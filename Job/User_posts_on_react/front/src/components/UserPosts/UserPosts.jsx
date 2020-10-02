@@ -9,10 +9,9 @@ import { connect } from "react-redux";
 import addInfo from "./../../actionCreator/addInfo";
 import { ModalAddPostContext } from "../../context/modalAddInfoContext";
 import * as firebase from "firebase";
-import { SortableContainer } from "react-sortable-hoc";
 
-const UserPosts = SortableContainer(({ addInfo }) => {
-  const { posts, updatePosts } = useContext(PostsContext);
+const UserPosts = ({ addInfo }) => {
+  const { posts, updatePosts, setUpdatePosts } = useContext(PostsContext);
   const { toggleModal, isModalOpen } = useContext(ModalContext);
   const { state } = useContext(CurrentPostContext);
   const { isAddPostModalOpen, toggleAddPostModalOpen } = useContext(
@@ -46,6 +45,20 @@ const UserPosts = SortableContainer(({ addInfo }) => {
       : setPostValid(true);
   };
 
+  const onDrop = (item, monitor) => {
+    const newPosts = updatePosts
+    .filter(post => post.id !== item.id)
+    .concat({ ...item });
+    setUpdatePosts([ ...newPosts ]);
+  };
+
+  const moveItem = (dragIndex, hoverIndex) => {
+    const post = updatePosts[dragIndex];
+    const newPosts = updatePosts.filter((post, index) => index !== dragIndex);
+    newPosts.splice(hoverIndex, 0, post);
+    setUpdatePosts([ ...newPosts ]);
+  };
+
   const createPost = async () => {
     setLoader(true);
     let db = await firebase.database();
@@ -61,16 +74,16 @@ const UserPosts = SortableContainer(({ addInfo }) => {
   };
   return (
     <>
-      <div className={style.Container}>
+      <div className={style.Container} onDrop={onDrop}>
         {updatePosts.length !== 0 ? (
           updatePosts
-            .sort((a, b) => a.userId - b.userId)
-            .map((post, index=post.userId) => (
+            .map((post, index) => (
                 <Post
                   post={post}
                   key={post.id}
                   id={post.id}
                   index={index}
+                  moveItem={moveItem}
                 />
             ))
         ) : (
@@ -151,7 +164,7 @@ const UserPosts = SortableContainer(({ addInfo }) => {
       )}
     </>
   );
-})
+}
 
 export { UserPosts };
 export default connect(null, { addInfo })(UserPosts);

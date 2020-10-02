@@ -1,34 +1,63 @@
-import React, { useContext, useEffect, useState, createContext } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import { FavoritePostsContext } from '../../context/favoritePostsContext'
 import { CurrentPostContext } from '../../context/currentPostContext'
 import { ModalContext } from '../../context/modalPostInfoContext'
 import { PostsContext } from "../../context/postsContext";
 import { connect } from 'react-redux'
-import { SortableElement } from 'react-sortable-hoc'
 import changeInfo from './../../actionCreator/changeInfo'
 import style from './Post.module.css'
-import { useDrag } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from '../../utils/posts';
 
-const Post = ({post, check, changeInfo, id, index}) => {
+const Post = ({post, check, changeInfo, moveItem, id, index}) => {
     const {addPost, removePost} = useContext(FavoritePostsContext)
     const {postInformation} = useContext(CurrentPostContext)
     const {toggleModal} = useContext(ModalContext)
-    const {info} = useContext(PostsContext);
+    const { info } = useContext(PostsContext)
 
     const [checked, setChecked] = useState(check)
+    const ref = useRef(null);
 
     const [{ isDragging }, drag] = useDrag({
         item: {
             type:ItemTypes.POST,
-            id:id,
-            title:post.title,
-            body:post.body
+            index:index,
+            ...post,
         },
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         })
     })
+
+    const [{isOver}, drop] = useDrop({
+        accept: ItemTypes.POST,
+        hover(item, monitor) {
+            if (!ref.current) {
+                return
+            }
+            const dragIndex = item.index;
+            const hoverIndex = index;
+
+            if (dragIndex === hoverIndex) {
+                return
+            }
+
+            const hoveredRect = ref.current.getBoundingClientRect();
+            const hoverMiddleY = (hoveredRect.bottom - hoveredRect.top) / 2;
+            const mousePosition = monitor.getClientOffset();
+            const hoverClientY = mousePosition.y - hoveredRect.top;
+
+            if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+                return;
+            }
+
+            if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+                return;
+            }
+            moveItem(dragIndex, hoverIndex);
+            item.index = hoverIndex;
+        },
+    });
 
     const sendInfo = () => {
         postInformation(post.title, post.body)
@@ -48,8 +77,10 @@ const Post = ({post, check, changeInfo, id, index}) => {
         checked ? addPost(post.title, post.body, id) : removePost(id)
     },[checked])
 
+    drag(drop(ref));
+
     return (
-        <div className={isDragging ? style.ContainerInMove : style.Container} key={id} index={index} ref={drag}>
+        <div className={isDragging ? style.ContainerInMove : style.Container} key={id} index={index} ref={ref} >
             <input 
                 type="checkbox" 
                 title="add to favorite"
