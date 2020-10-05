@@ -27,10 +27,10 @@ const CustomPost = ({post, id}) => {
     }
 
     return (
-        <div className={style.Container} onClick={sendInfo}>
-            <button className={style.Button} onClick={handleChildClick}/>
-            <h3 className={style.Title}>{post.title}</h3>
-            <div>{post.body}</div>
+        <div className={style.Container} onClick={sendInfo} role='container'>
+            <button className={style.Button} onClick={handleChildClick} role='delete_post'/>
+            <h3 className={style.Title} role='title'>{post.title}</h3>
+            <div role='content'>{post.body}</div>
         </div>
     )
 }

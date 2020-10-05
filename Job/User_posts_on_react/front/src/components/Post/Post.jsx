@@ -80,7 +80,13 @@ const Post = ({post, check, changeInfo, moveItem, id, index}) => {
     drag(drop(ref));
 
     return (
-        <div className={isDragging ? style.ContainerInMove : style.Container} key={id} index={index} ref={ref} >
+        <div 
+            className={isDragging ? style.ContainerInMove : style.Container} 
+            key={id} 
+            index={index} 
+            ref={ref}
+            role='container' 
+        >
             <input 
                 type="checkbox" 
                 title="add to favorite"
@@ -88,24 +94,37 @@ const Post = ({post, check, changeInfo, moveItem, id, index}) => {
                 className={style.Button} 
                 onClick={handleChildClick}
                 onChange={handleChanges}
+                role='add_favorite'
             />
-            <input type="image" src={require('./../../img/search.svg')} title="watch" alt="watch" className={style.searchIcon} onClick={sendInfo}/>
+            <input 
+                type="image" 
+                src={require('./../../img/search.svg')} 
+                title="watch" 
+                alt="watch" 
+                className={style.searchIcon} 
+                onClick={sendInfo}
+                role='watch'
+            />
             {info ?
                 <h3 className={style.Title}>
                     {post.title.slice(0,post.title.indexOf(info))}
-                    <span className={style.FindText}>{info}</span>
+                    <span className={style.FindText} role='title'>{info}</span>
                     {post.title.slice(post.title.indexOf(info) + info?.length)} 
                 </h3> 
                 :
-                <h3 className={style.Title}>{ post.title }</h3>  
+                <h3 className={style.Title} role='title'>{ post.title }</h3>  
             }            
-            <div>{post.body}</div>
+            <div role='content'>{post.body}</div>
         </div>   
     )
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return state.filter(obj => obj.id === ownProps.id)[0] ? {check: state.filter(obj => obj.id === ownProps.id)[0].check} : (<div class="loader"></div>)}
+    return state.filter(obj => obj.id === ownProps.id)[0] ? 
+        {check: state.filter(obj => obj.id === ownProps.id)[0].check
+    } : (
+        <div class="loader"></div>
+)}
 
 export default connect(mapStateToProps, {
     changeInfo

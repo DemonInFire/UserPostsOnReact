@@ -25,6 +25,24 @@ describe('CustomPost component', () => {
                         <CustomPost {...props}/>
                     </FavoritePostsContextProvider>
                 </CurrentPostContextProvider>
-            </ModalContextProvider>)
+            </ModalContextProvider>
+        )
+    })
+
+    it('Check elements in Custom Post', () => {
+        const rerender = render(
+            <ModalContextProvider>
+                <CurrentPostContextProvider>
+                    <FavoritePostsContextProvider>
+                        <CustomPost {...props}/>
+                    </FavoritePostsContextProvider>
+                </CurrentPostContextProvider>
+            </ModalContextProvider>
+        )
+
+        expect(rerender.getByRole('title').textContent).toBe('Post title')
+        expect(rerender.getByRole('content').textContent).toBe('Post content')
+        expect(rerender.getByRole('delete_post')).toBeInTheDocument()
+        expect(rerender.getByRole('container')).toBeInTheDocument()
     })
 })

@@ -74,7 +74,7 @@ const UserPosts = ({ addInfo }) => {
   };
   return (
     <>
-      <div className={style.Container} onDrop={onDrop}>
+      <div className={style.Container} onDrop={onDrop} role='container'>
         {updatePosts.length !== 0 ? (
           updatePosts
             .map((post, index) => (
@@ -87,36 +87,36 @@ const UserPosts = ({ addInfo }) => {
                 />
             ))
         ) : (
-          <div>Find no posts</div>
+          <div role='no_posts'>Find no posts</div>
         )}
       </div>
       {isModalOpen && (
         <Modal>
-          <div className={style.ModalContainer}>
-            <button className={style.ModalButton} onClick={toggleModal}>
+          <div className={style.ModalContainer} role='modal_container'>
+            <button className={style.ModalButton} onClick={toggleModal} role='close_button'>
               x
             </button>
-            <h2 className={style.ModalTitle}>{state.title}</h2>
-            <div className={style.ModalContent}>{state.body}</div>
+            <h2 className={style.ModalTitle} role='title'>{state.title}</h2>
+            <div className={style.ModalContent} role='content'>{state.body}</div>
           </div>
         </Modal>
       )}
       {isAddPostModalOpen && (
         <Modal>
-          <div className={style.ModalContainer}>
-            <button className={style.ModalButton} onClick={onClose}>
+          <div className={style.ModalContainer} role='modal_container'>
+            <button className={style.ModalButton} onClick={onClose} role='close_button'>
               x
             </button>
             {isLoader ? (
               <div>
                 {isSuccess ? (
-                  <h1>Data successfully saved!</h1>
+                  <h1 role='data_saved'>Data successfully saved!</h1>
                 ) : (
-                  <div className={style.Loader}></div>
+                  <div className={style.Loader} role='loader'></div>
                 )}
               </div>
             ) : (
-              <div className={style.Content}>
+              <div className={style.Content} role='modal_container'>
                 <div>
                   <div>
                     <label>Title</label>
@@ -130,6 +130,7 @@ const UserPosts = ({ addInfo }) => {
                       placeholder="Input post title"
                       onChange={changeHandler}
                       required
+                      role='title'
                     />
                   </div>
                 </div>
@@ -146,6 +147,7 @@ const UserPosts = ({ addInfo }) => {
                       rows="6"
                       onChange={changeHandler}
                       required
+                      role='content'
                     />
                   </div>
                 </div>
@@ -155,6 +157,7 @@ const UserPosts = ({ addInfo }) => {
                     value="Submit"
                     onClick={createPost}
                     disabled={isPostValid}
+                    role='submit'
                   />
                 </div>
               </div>

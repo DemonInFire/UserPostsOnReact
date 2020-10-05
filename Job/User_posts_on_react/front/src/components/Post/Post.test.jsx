@@ -4,7 +4,6 @@ import { render } from '@testing-library/react'
 import FavoritePostsContextProvider from '../../context/favoritePostsContext'
 import CurrentPostContextProvider from '../../context/currentPostContext';
 import ModalContextProvider from '../../context/modalPostInfoContext'
-import changeInfo from '../../actionCreator/changeInfo'
 import { Provider } from 'react-redux'
 import store from '../../store/reduxStore'
 import PostsContextProvider from '../../context/postsContext';
@@ -20,8 +19,7 @@ describe('Post component', () => {
         },
         index:'3',
         id:'3',
-        changeInfo:changeInfo(),
-        check:false
+        check:false,
     }
 
     it('Render Post', () => {
@@ -40,5 +38,29 @@ describe('Post component', () => {
                 </DndProvider>
             </Provider>
         )
+    })
+    
+    it('Check elements in Post Component', () => {
+        const rerender = render(
+            <Provider store={store}>
+                <DndProvider backend={HTML5Backend}>
+                    <PostsContextProvider>
+                        <ModalContextProvider>
+                            <CurrentPostContextProvider>
+                                <FavoritePostsContextProvider>
+                                    <Post {...props}/>
+                                </FavoritePostsContextProvider>
+                            </CurrentPostContextProvider>
+                        </ModalContextProvider>
+                    </PostsContextProvider>
+                </DndProvider>
+            </Provider>
+        )
+
+        expect(rerender.getByRole('title').textContent).toBe('Post title')
+        expect(rerender.getByRole('content').textContent).toBe('Post content')
+        expect(rerender.getByRole('add_favorite')).toBeInTheDocument()
+        expect(rerender.getByRole('container')).toBeInTheDocument()
+        expect(rerender.getByRole('watch')).toBeInTheDocument()
     })
 })

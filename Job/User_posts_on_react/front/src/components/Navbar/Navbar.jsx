@@ -78,7 +78,8 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <button 
+              <button
+                role='add_post' 
                 className={style.NavLink}
                 onClick={sendInfo}
               >
@@ -86,7 +87,14 @@ const Navbar = () => {
               </button>
             </li>
             <li className={style.Input}>
-              <input type="text" id="filter" placeholder="Search for..." className={style.Search} onChange={getInfo}/>
+              <input 
+                type="text" 
+                id="filter" 
+                placeholder="Search for..." 
+                className={style.Search} 
+                onChange={getInfo}
+                role='search'
+              />
             </li>
           </ul>
         </nav>

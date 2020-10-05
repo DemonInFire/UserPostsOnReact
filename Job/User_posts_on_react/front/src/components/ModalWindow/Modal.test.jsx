@@ -8,7 +8,7 @@ describe('Modal component', () => {
     }
 
     it('Render Modal', () => {
-    render(<Modal {...props}/>)
+        render(<Modal {...props}/>)
     })
 
 })

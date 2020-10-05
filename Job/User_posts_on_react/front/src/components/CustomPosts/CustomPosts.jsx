@@ -68,46 +68,46 @@ const CustomPosts = () => {
 
   return (
     <>
-      <div className={style.Container}>
+      <div className={style.Container} role='post_container'>
         {customPosts.map((post) => {
           addInfo(false, post.id);
           return post ? (
             <CustomPost post={post.newPostInfo} key={post.id} id={post.id}/>
           ) : (
-            <div>There is no custom posts</div>
+            <div role='no_posts'>There is no custom posts</div>
           );
         })}
       </div>
       {isModalOpen && (
         <Modal>
-          <div className={style.ModalContainer}>
-            <button className={style.ModalButton} onClick={toggleModal}>
+          <div role='modal_container' className={style.ModalContainer}>
+            <button className={style.ModalButton} onClick={toggleModal} role='close_button'>
               x
             </button>
-            <h2 className={style.ModalTitle}>{state.title}</h2>
-            <div className={style.ModalContent}>{state.body}</div>
+            <h2 className={style.ModalTitle} role='title'>{state.title}</h2>
+            <div className={style.ModalContent} role='content'>{state.body}</div>
           </div>
         </Modal>
       )}
       {isAddPostModalOpen && (
         <Modal>
-          <div className={style.ModalContainer}>
-            <button className={style.ModalButton} onClick={onClose}>
+          <div role='modal_container' className={style.ModalContainer}>
+            <button className={style.ModalButton} onClick={onClose} role='close_button'>
               x
             </button>
             {isLoader ? (
               <div>
                 {isSuccess ? (
-                  <h1>Data successfully saved!</h1>
+                  <h1 role='data_saved'>Data successfully saved!</h1>
                 ) : (
-                  <div className={style.Loader}></div>
+                  <div className={style.Loader} role='loader'></div>
                 )}
               </div>
             ) : (
               <div className={style.Content}>
                 <div>
                   <div>
-                    <label>Title</label>
+                    <label role='lable'>Title</label>
                   </div>
                   <div>
                     <input
@@ -118,12 +118,13 @@ const CustomPosts = () => {
                       placeholder="Input post title"
                       onChange={changeHandler}
                       required
+                      role='input_title'
                     />
                   </div>
                 </div>
                 <div>
                   <div>
-                    <label>Content</label>
+                    <label role='content'>Content</label>
                   </div>
                   <div className={style.TextArea}>
                     <textarea
@@ -134,6 +135,7 @@ const CustomPosts = () => {
                       rows="6"
                       onChange={changeHandler}
                       required
+                      role='input_content'
                     />
                   </div>
                 </div>
@@ -143,6 +145,7 @@ const CustomPosts = () => {
                     value="Submit"
                     onClick={createPost}
                     disabled={isPostValid}
+                    role='submit'
                   />
                 </div>
               </div>
