@@ -64,13 +64,10 @@ const Post = ({post, check, changeInfo, moveItem, id, index}) => {
         toggleModal()
     }
 
-    const handleChildClick = (e) => {
-        e.stopPropagation()
-    }
-
-    const handleChanges = () => {
+    const handleChanges = (e) => {
         setChecked(!checked)
         changeInfo(checked, id)
+        e.stopPropagation()
     }
     
     useEffect(() => {
@@ -92,8 +89,7 @@ const Post = ({post, check, changeInfo, moveItem, id, index}) => {
                 title="add to favorite"
                 checked={!!checked} 
                 className={style.Button} 
-                onClick={handleChildClick}
-                onChange={handleChanges}
+                onClick={handleChanges}
                 role='add_favorite'
             />
             <input 
