@@ -59,11 +59,11 @@ const UserPosts = ({ addInfo }) => {
     setUpdatePosts([ ...newPosts ]);
   };
 
-  const createPost = async () => {
+  const createPost = () => {
     setLoader(true);
-    let db = await firebase.database();
-    let ref = await db.ref("server/saving-data/user-posts");
-    ref.set({ newPostInfo }).then(setSuccess(true));
+    let store = firebase.firestore();
+    let ref = store.collection("CustomPosts");
+    ref.add({ newPostInfo }).then(setSuccess(true))
     setNewPostInfo(initialState);
     setPostValid(validStatus);
   };
@@ -130,7 +130,7 @@ const UserPosts = ({ addInfo }) => {
                       placeholder="Input post title"
                       onChange={changeHandler}
                       required
-                      role='title'
+                      role='modal_title'
                     />
                   </div>
                 </div>
@@ -147,7 +147,7 @@ const UserPosts = ({ addInfo }) => {
                       rows="6"
                       onChange={changeHandler}
                       required
-                      role='content'
+                      role='modal_content'
                     />
                   </div>
                 </div>

@@ -85,7 +85,7 @@ const Post = ({post, check, changeInfo, moveItem, id, index}) => {
             key={id} 
             index={index} 
             ref={ref}
-            role='container' 
+            role='post_container' 
         >
             <input 
                 type="checkbox" 
@@ -97,13 +97,14 @@ const Post = ({post, check, changeInfo, moveItem, id, index}) => {
                 role='add_favorite'
             />
             <input 
-                type="image" 
+                type="image"
+                label='watch_posts_content' 
                 src={require('./../../img/search.svg')} 
                 title="watch" 
                 alt="watch" 
                 className={style.searchIcon} 
                 onClick={sendInfo}
-                role='watch'
+                role='watch_posts_content'
             />
             {info ?
                 <h3 className={style.Title}>

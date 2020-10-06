@@ -63,8 +63,8 @@ describe('Post component', () => {
             </Provider>
         )
 
-        expect(rerender.queryByRole('title')).not.toBeInTheDocument()
-        expect(rerender.queryByRole('content')).not.toBeInTheDocument()
+        expect(rerender.queryByRole('modal_title')).not.toBeInTheDocument()
+        expect(rerender.queryByRole('modal_content')).not.toBeInTheDocument()
         expect(rerender.getByRole('container')).toBeInTheDocument()
         expect(rerender.queryByRole('modal_container')).not.toBeInTheDocument()
     })

@@ -38,10 +38,10 @@ const CustomPosts = () => {
       : setPostValid(true);
   };
 
-  const createPost = async () => {
+  const createPost = () => {
     setLoader(true);
-    let store = await firebase.firestore();
-    let ref = await store.collection("CustomPosts");
+    let store = firebase.firestore();
+    let ref = store.collection("CustomPosts");
     ref.add({ newPostInfo }).then(setSuccess(true));
     setNewPostInfo(initialState);
     setPostValid(validStatus);
