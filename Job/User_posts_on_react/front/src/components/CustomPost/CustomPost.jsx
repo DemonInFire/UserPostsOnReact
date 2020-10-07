@@ -27,7 +27,7 @@ const CustomPost = ({post, id}) => {
     }
 
     return (
-        <div className={style.Container} onClick={sendInfo} role='container'>
+        <div className={style.Container} onClick={sendInfo} role='container' id={id}>
             <button className={style.Button} onClick={handleChildClick} role='delete_post'/>
             <h3 className={style.Title} role='title'>{post.title}</h3>
             <div role='content'>{post.body}</div>

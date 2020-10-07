@@ -15,13 +15,13 @@ describe('user posts', () => {
     })
 
     it('should display custom posts', () => {
-        cy.get('div').contains('rfer')
-        cy.get('h3').contains('wewe')
+        cy.get('div').contains('Complete')
+        cy.get('h3').contains('Test')
     });
 
     it('should open modal window', () => {
-        cy.get('').contains('[role="content"]').click()
-        cy.get('[role="modal_container"]').contains('rrre')
+        cy.get('[role="content"]').contains('Complete').click()
+        cy.get('[role="modal_container"]').contains('Test')
     })
 
     // it('should delete custom post', () => {
