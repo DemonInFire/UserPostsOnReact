@@ -102,7 +102,7 @@ const FavoritePosts = () => {
                       placeholder="Input post title"
                       onChange={changeHandler}
                       required
-                      role='title'
+                      role='modal_title'
                     />
                   </div>
                 </div>
@@ -119,7 +119,7 @@ const FavoritePosts = () => {
                       rows="6"
                       onChange={changeHandler}
                       required
-                      role='content'
+                      role='modal_content'
                     />
                   </div>
                 </div>
