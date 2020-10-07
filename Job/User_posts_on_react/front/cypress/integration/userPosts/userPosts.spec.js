@@ -28,20 +28,23 @@ describe('user posts', () => {
         cy.get('[role="add_post"]').click()
         cy.get('[role="modal_title"]').type('Test')
         cy.get('[role="modal_content"]').type('Complete')
-        cy.get('[role="submit"]').click() // I don't know why it doesn't appear
+        cy.get('[role="submit"]').click()
+        cy.wait(1500);
         cy.visit('/customPosts')
-        // cy.get('div').contains('Complete')
+        cy.get('div').contains('Complete')
     })
 
     it('should add to favorite', () => {
-        cy.get('[role="add_favorite"]').eq(12).click({force: true}) // I don't know why it doesn't appear x2
+        cy.get('[role="add_favorite"]').eq(12).click({force: true}) // I don't know why it doesn't appear
+        cy.wait(1500);
         cy.visit('/favorite')
         // cy.get('div').contains('dolor')
     })
 
     it('should be draggable', () => {
         cy.get('[role="post_container"]').eq(1).trigger("mousedown", {button: 0}, {force: true}).trigger("mousemove", {bottom:500}, {force:true})
-        cy.get('[role="post_container"]').eq(5).trigger("mouseup").click().trigger("mouseup", {force: true})
+        cy.wait(1500)
+        cy.get('[role="post_container"]').eq(5).trigger("mouseup", {force: true})
     })
 
 })

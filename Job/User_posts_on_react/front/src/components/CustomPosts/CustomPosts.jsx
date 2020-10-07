@@ -68,7 +68,7 @@ const CustomPosts = () => {
 
   return (
     <>
-      <div className={style.Container} role='post_container'>
+      <div className={style.Container} role='posts_container'>
         {customPosts.map((post) => {
           addInfo(false, post.id);
           return post ? (

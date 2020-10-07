@@ -53,7 +53,7 @@ const FavoritePosts = () => {
 
   return (
     <>
-      <div className={style.Container} role='container'>
+      <div className={style.Container} role='main_container'>
         {favoritePosts.map((post) => {
           return <FavoritePost post={post} key={post.id} />;
         })}

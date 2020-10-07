@@ -59,7 +59,7 @@ describe('CustomPosts component', () => {
             </Provider >
         )
     
-        expect(rerender.getByRole('post_container')).toBeInTheDocument()
+        expect(rerender.getByRole('posts_container')).toBeInTheDocument()
         expect(rerender.queryByRole('no_posts')).not.toBeInTheDocument()
         expect(rerender.queryByRole('modal_container')).not.toBeInTheDocument()
         expect(rerender.queryByRole('close_button')).not.toBeInTheDocument()

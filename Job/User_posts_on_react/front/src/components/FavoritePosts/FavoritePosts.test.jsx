@@ -52,7 +52,7 @@ describe('FavoritePosts component', () => {
 
         expect(rerender.queryByRole('title')).not.toBeInTheDocument()
         expect(rerender.queryByRole('content')).not.toBeInTheDocument()
-        expect(rerender.getByRole('container')).toBeInTheDocument()
+        expect(rerender.getByRole('main_container')).toBeInTheDocument()
         expect(rerender.queryByRole('modal_container')).not.toBeInTheDocument()
         expect(rerender.queryByRole('save_data')).not.toBeInTheDocument()
     })
