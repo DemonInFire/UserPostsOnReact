@@ -42,9 +42,11 @@ describe('user posts', () => {
     })
 
     it('should be draggable', () => {
-        cy.get('[role="post_container"]').eq(1).trigger("mousedown", {button: 0}, {force: true}).trigger("mousemove", {bottom:500}, {force:true})
-        cy.wait(1500)
-        cy.get('[role="post_container"]').eq(5).trigger("mouseup", {force: true})
+        cy.get('[role="post_container"]')
+            .eq(1)
+            .trigger("mousedown", { which: 1 })
+            .trigger("mousemove", { X: 2000, Y: 2000 })
+            .trigger("mouseup")
     })
 
 })
